@@ -1,4 +1,6 @@
-// helpers
+import { create, error } from "./helpers.js"
+
+// routing
 export function router(routes){
     if(typeof routes != "object"){
         error("Router must be an object")
@@ -22,43 +24,6 @@ export function router(routes){
             }
         }
     }
-}
-
-function create(type, text, attr){
-    const element = document.createElement(type)
-
-    if(attr != undefined && typeof attr == "object"){
-        const list = Object.keys(attr)
-
-        for(let i=0; i<list.length; i++){
-            element.setAttribute(list[i], eval(`attr.${list[i]}`))
-        }
-    }else if(attr != undefined && typeof attr != "object"){
-        error(`Attributes can not be of '${typeof attr}' type`)
-    }
-
-    if(text != undefined){
-        if(typeof text == "object"){
-            element.innerHTML = text.join("")
-        }else{
-            element.innerHTML = text
-        }
-    }
-
-    return element.outerHTML
-}
-
-function error(e){
-    document.body.innerHTML = ""
-    document.title = e
-
-    const error_msg = document.createElement("div")
-
-    error_msg.setAttribute("style", "margin:auto; padding:20px 20px; background-color:#232b2b; max-width:750px; margin-top:50px; border-radius:10px; text-align:center;")
-    error_msg.innerHTML = `<h2 style = "color:#FB3227; font-family:arial;">${e}</h2>`
-
-    document.body.appendChild(error_msg)
-	throw(e)
 }
 
 // text blocks
@@ -105,14 +70,12 @@ export function link(attr){
     if(typeof attr != "object"){
         error(`Attributes can not be of '${typeof attr}' type`)
     }else{
-        const names = Object.keys(attr)
-        for(let i=0; i<names.length; i++){
+        for(let i=0; i<Object.keys(attr).length; i++){
             //link_element.setAttribute()
-            link_element.setAttribute(names[i], eval(`attr.${names[i]}`))
+            link_element.setAttribute(Object.keys(attr)[i], eval(`attr.${Object.keys(attr)[i]}`))
         }
         document.head.appendChild(link_element)
     }
-    //return create("link", undefined, attr)
 }
 
 export function br(){
@@ -127,6 +90,32 @@ export function code(text, attr){
     return create("code", text, attr)
 }
 
-export function img(text, attr){
-    return create("img", text, attr)
+export function img(attr){
+    const img_element = document.createElement("img")
+
+    if(attr != undefined && typeof attr == "object"){
+        for(let f=0; f<Object.keys(attr).length; f++){
+            img_element.setAttribute(Object.keys(attr)[f], eval(`attr.${Object.keys(attr)[f]}`))
+        }
+    }else{
+        error("Image elements must have 'object' typeattributes")
+    }
+
+    return img_element.outerHTML
+}
+
+export function script(text){
+    const script_element = document.createElement("script")
+
+    script_element.setAttribute("type", "text/javascript")
+
+    if(text != undefined && typeof text == "object"){
+        for(let f=0; f<Object.keys(text).length; f++){
+            script_element.setAttribute(Object.keys(text)[f], eval(`text.${Object.keys(text)[f]}`))
+        }
+    }else if(text != undefined){
+        script_element.innerHTML = text
+    }
+
+    document.body.appendChild(script_element)
 }
