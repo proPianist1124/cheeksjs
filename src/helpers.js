@@ -1,23 +1,34 @@
-export function create(type, text, attr){
-    const element = document.createElement(type)
+export function create(type, tag, text, attr){
+    const element = document.createElement(tag)
 
-    if(attr != undefined && typeof attr == "object"){
-        for(let i=0; i<Object.keys(attr).length; i++){
-            element.setAttribute(Object.keys(attr)[i], eval(`attr.${Object.keys(attr)[i]}`))
-        }
-    }else if(attr != undefined && typeof attr != "object"){
-        error(`Attributes can not be of '${typeof attr}' type`)
+    switch(type){
+        case "multi":
+            if(attr != undefined && typeof attr == "object"){
+                for(let i=0; i<Object.keys(attr).length; i++){
+                    element.setAttribute(Object.keys(attr)[i], eval(`attr.${Object.keys(attr)[i]}`))
+                }
+            }else if(attr != undefined && typeof attr != "object"){
+                error(`Attributes can not be of '${typeof attr}' type`)
+            }
+        
+            if(text != undefined){
+                if(typeof text == "object"){
+                    element.innerHTML = text.join("")
+                }else{
+                    element.innerHTML = text
+                }
+            }
+            return element.outerHTML
+        case "single":
+            if(attr != undefined && typeof attr == "object"){
+                for(let f=0; f<Object.keys(attr).length; f++){
+                    element.setAttribute(Object.keys(attr)[f], eval(`attr.${Object.keys(attr)[f]}`))
+                }
+            }else{
+                error("Single elements must have 'object' type in attributes")
+            }
+            document.head.appendChild(element)
     }
-
-    if(text != undefined){
-        if(typeof text == "object"){
-            element.innerHTML = text.join("")
-        }else{
-            element.innerHTML = text
-        }
-    }
-
-    return element.outerHTML
 }
 
 export function error(e){

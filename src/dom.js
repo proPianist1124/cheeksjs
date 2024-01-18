@@ -33,33 +33,33 @@ for(let i=0; i<6; i++){
         headings[i] = ""
     }else{
         headings[i] = function heading(text, attr){
-            return create(`h${i}`, text, attr)
+            return create("multi", `h${i}`, text, attr)
         }
     }
 }
 export const h = headings
 
 export function p(text, attr){
-    return create("p", text, attr)
+    return create("multi", "p", text, attr)
 }
 
 export function a(text, attr){
-    return create("a", text, attr)
+    return create("multi", "a", text, attr)
 }
 
 export function span(text, attr){
-    return create("span", text, attr)
+    return create("multi", "span", text, attr)
 }
 
 export function b(text, attr){
-    return create("b", text, attr)
-}
-
-export function div(text, attr){
-    return create("div", text, attr)
+    return create("multi", "b", text, attr)
 }
 
 // misc
+export function meta(attr){
+    return create("single", "meta", null, attr)
+}
+
 export function title(title){
     if(title == undefined){
         error("Title must have content inside")
@@ -69,17 +69,7 @@ export function title(title){
 }
 
 export function link(attr){
-    const link_element = document.createElement("LINK")
-
-    if(typeof attr != "object"){
-        error(`Attributes can not be of '${typeof attr}' type`)
-    }else{
-        for(let i=0; i<Object.keys(attr).length; i++){
-            //link_element.setAttribute()
-            link_element.setAttribute(Object.keys(attr)[i], eval(`attr.${Object.keys(attr)[i]}`))
-        }
-        document.head.appendChild(link_element)
-    }
+    return create("single", "link", null, attr)
 }
 
 export function br(){
@@ -90,26 +80,20 @@ export function hr(){
     return `<hr>`
 }
 
+export function div(text, attr){
+    return create("multi", "div", text, attr)
+}
+
 export function code(text, attr){
-    return create("code", text, attr)
+    return create("multi", "code", text, attr)
 }
 
 export function pre(text, attr){
-    return create("pre", text, attr)
+    return create("multi", "pre", text, attr)
 }
 
 export function img(attr){
-    const img_element = document.createElement("img")
-
-    if(attr != undefined && typeof attr == "object"){
-        for(let f=0; f<Object.keys(attr).length; f++){
-            img_element.setAttribute(Object.keys(attr)[f], eval(`attr.${Object.keys(attr)[f]}`))
-        }
-    }else{
-        error("Image elements must have 'object' typeattributes")
-    }
-
-    return img_element.outerHTML
+    return create("single", "img", null, attr)
 }
 
 export function script(text){

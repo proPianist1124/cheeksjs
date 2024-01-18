@@ -1,7 +1,9 @@
-import { router, title, link, h, p, span, a, br, code, img, script } from "./src/dom.js"
+import { router, meta, link, title, h, p, span, a, br, code, img, script } from "./src/dom.js"
 
 function index(){
     return[
+        meta({ charset:"utf-8" }),
+        meta({ name:"viewport", content:"width=device-width, initial-scale=1.0" }),
         link({
             rel:"icon",
             type:"image/x-icon",
@@ -19,7 +21,7 @@ function index(){
         h[1]([
             span("Cheeks", { style:"font-style:italic" }),
             "JS Framework",
-            span(" ! to be released soon !", { style:"font-size:13px; color:red;" })
+            span(" releasing soon", { style:"font-size:13px; color:red;" })
         ]),
         p([
             "A frontend framework where you can write every single page of your site in one file - ",
