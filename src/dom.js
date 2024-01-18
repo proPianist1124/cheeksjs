@@ -55,6 +55,10 @@ export function b(text, attr){
     return create("b", text, attr)
 }
 
+export function div(text, attr){
+    return create("div", text, attr)
+}
+
 // misc
 export function title(title){
     if(title == undefined){
@@ -88,6 +92,10 @@ export function hr(){
 
 export function code(text, attr){
     return create("code", text, attr)
+}
+
+export function pre(text, attr){
+    return create("pre", text, attr)
 }
 
 export function img(attr){

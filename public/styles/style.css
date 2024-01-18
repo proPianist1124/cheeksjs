@@ -31,6 +31,11 @@ hr{
     margin-bottom:20px;
 }
 
+p{
+    margin-top:25px;
+    margin-bottom:25px;
+}
+
 h2, h3{
     margin-top:35px;
 }
@@ -38,6 +43,9 @@ h2, h3{
 code{
     font-family:"Roboto Mono", monospace;
     background-color:var(--code-background);
-    padding:10px 25px;
+    padding:15px 25px;
     color:var(--code-color);
+    border-radius:5px;
+    display:block;
+    white-space:pre-wrap;
 }
