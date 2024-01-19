@@ -5,7 +5,11 @@ export function create(type, tag, text, attr){
         case "multi":
             if(attr != undefined && typeof attr == "object"){
                 for(let i=0; i<Object.keys(attr).length; i++){
-                    element.setAttribute(Object.keys(attr)[i], eval(`attr.${Object.keys(attr)[i]}`))
+                    if(Object.keys(attr)[i] == "onclick"){
+                        element.setAttribute(Object.keys(attr)[i], `${eval(`attr.${Object.keys(attr)[i]}`).name}(); ${eval(`attr.${Object.keys(attr)[i]}`)}`)
+                    }else{
+                        element.setAttribute(Object.keys(attr)[i], eval(`attr.${Object.keys(attr)[i]}`))
+                    }
                 }
             }else if(attr != undefined && typeof attr != "object"){
                 error(`Attributes can not be of '${typeof attr}' type`)
@@ -24,10 +28,17 @@ export function create(type, tag, text, attr){
                 for(let f=0; f<Object.keys(attr).length; f++){
                     element.setAttribute(Object.keys(attr)[f], eval(`attr.${Object.keys(attr)[f]}`))
                 }
+            }else if(attr == undefined && text != undefined){
+                element.setAttribute("type", "text/css")
+                element.innerHTML = text
             }else{
-                error("Single elements must have 'object' type in attributes")
+                error("Something went wrong")
             }
-            document.head.appendChild(element)
+            if(tag == "link"){
+                document.head.appendChild(element)
+            }else{
+                return element.outerHTML
+            }
     }
 }
 

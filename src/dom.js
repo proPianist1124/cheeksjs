@@ -1,4 +1,5 @@
 import { create, error } from "./helpers.js"
+import { components } from "./components.js"
 
 // routing
 export function router(routes){
@@ -6,94 +7,36 @@ export function router(routes){
         error("Router must be an object")
     }else{
         for(let i=0; i<routes.length; i++){
-            if(typeof routes[i].page != "object"){
-                error("'Routes' attribute must be an 'object'")
-            }else{
-                if(window.location.pathname == `${routes[i].route}/`){
-                    let pages = []
-
-                    eval(`
-                        ${routes[i].page[1]}
-                        const content = ${routes[i].page[0]}();
-                        for(let i=0; i<content.length; i++){
-                            pages.push(content[i])
-                        }
-                    `)
-                    document.body.outerHTML = pages.join("")
-                }
+            if(window.location.pathname == `${routes[i].route}/`){
+                let pages = []
+                eval(`
+                    ${create.toString()}
+                    ${components()}
+                    ${routes[i].page}
+                    const content = ${routes[i].page.name}();
+                    for(let i=0; i<content.length; i++){
+                        pages.push(content[i])
+                    }
+                `)
+                document.body.outerHTML = pages.join("")
             }
         }
     }
 }
 
-// text blocks
-let headings = []
-for(let i=0; i<6; i++){
-    if(i == 0){
-        headings[i] = ""
-    }else{
-        headings[i] = function heading(text, attr){
-            return create("multi", `h${i}`, text, attr)
-        }
-    }
-}
-export const h = headings
 
-export function p(text, attr){
-    return create("multi", "p", text, attr)
-}
-
-export function a(text, attr){
-    return create("multi", "a", text, attr)
-}
-
-export function span(text, attr){
-    return create("multi", "span", text, attr)
-}
-
-export function b(text, attr){
-    return create("multi", "b", text, attr)
-}
-
-// misc
-export function meta(attr){
-    return create("single", "meta", null, attr)
-}
+// miscellaneous
 
 export function title(title){
     if(title == undefined){
         error("Title must have content inside")
     }else{
-        return `<title>${title}</title>`
+        document.title = title
     }
-}
-
-export function link(attr){
-    return create("single", "link", null, attr)
 }
 
 export function br(){
     return `<br>`
-}
-
-export function hr(){
-    return `<hr>`
-}
-
-export function div(text, attr){
-    return create("multi", "div", text, attr)
-}
-
-export function code(text, attr){
-    return create("multi", "code", text, attr)
-}
-
-export function pre(text, attr){
-    return create("multi", "pre", text, attr)
-}
-
-export function img(attr){
-    return create("single", "img", null, attr)
 }
 
 export function script(text){
@@ -102,8 +45,8 @@ export function script(text){
     script_element.setAttribute("type", "text/javascript")
 
     if(text != undefined && typeof text == "object"){
-        for(let f=0; f<Object.keys(text).length; f++){
-            script_element.setAttribute(Object.keys(text)[f], eval(`text.${Object.keys(text)[f]}`))
+        for(let i=0; i<Object.keys(text).length; i++){
+            script_element.setAttribute(Object.keys(text)[i], eval(`text.${Object.keys(text)[i]}`))
         }
     }else if(text != undefined){
         script_element.innerHTML = text
