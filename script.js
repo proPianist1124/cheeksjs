@@ -7,7 +7,7 @@ function index(){
         link({
             rel:"icon",
             type:"image/x-icon",
-            href:"https://i.pinimg.com/originals/f0/66/df/f066df8e2e1b5ade03bc50c48e159c3f.gif"
+            href:"/public/img/favicon.ico"
         }),
         link({
             rel:"stylesheet",
@@ -33,7 +33,7 @@ function index(){
         code("git clone https://github.com/proPianist1124/cheeksjs.git" , { class:"language-js" }),
         br(),
         h3("2. Routing"),
-        p("This is the most important part - importing the router. Next, use the 'router' function and inside create an array of objects. Each object should have a 'route' and 'page' property. The 'route' property is the path of the page and the 'page' property is an array with the first element being the name of the page and the second element being the function that returns the page."),
+        p("This is the most important part - importing the router. Use the 'router' function and inside create an array of objects. Each object should have a 'route' and 'page' property."),
         code(`import { router } from "./src/dom.js"
 
 function index(){ // use functions like this to render pages
@@ -81,26 +81,37 @@ router([
     "some random text" // p text
 ], { style:"color:red" }) // you can continue to add other attributes inside this component`, { class:"language-js" }),
         p("The code block above shows components nested inside components. The structure is an array of components."),
+        br(),
+        h3("4. Functions"),
+        p("It's also possible for you to have functions inside components. Below is an example:"),
+        code(`function index(){
+    function click(){
+        alert("yay")
+    }
+    button("click me!", { onclick:click })
+}
+        `, { class:"language-js" }),
         script({ src:"/src/prism.js" })
     ]
 }
 
 function test_page(){
     function asdf(){
-        alert("test")
+        alert("the function works!!")
     }
     return [
         link({
             rel:"icon",
             type:"image/x-icon",
-            href:"/public/joe.png"
+            href:"/public/img/joe.png"
         }),
         title("teste page"),
         h1("this da test page real"),
-        a(button("go back to main page"), { href:"/" }),
-        button("tet", { onclick:asdf }),
+        a(button("go back to main page ➡️"), { href:"/" }),
         br(), br(),
-        img({ src:"/public/joe.png", alt:"test" }),
+        img({ src:"/public/img/joe.png", alt:"my boy joe" }),
+        br(),
+        button("test a function!", { onclick:asdf }),
         style(`
             body{
                 background-color:#000;
