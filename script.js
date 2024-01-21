@@ -34,7 +34,7 @@ function index(){
         br(),
         h3("2. Routing"),
         p("This is the most important part - importing the router. Use the 'router' function and inside create an array of objects. Each object should have a 'route' and 'page' property."),
-        code(`import { router } from "./src/dom.js"
+        code(`import { router } from "https://cheeksjs.pages.dev/src/dom.js"
 
 function index(){ // use functions like this to render pages
     return [
