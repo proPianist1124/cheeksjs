@@ -7,21 +7,23 @@ export function router(routes, components){
         if(typeof routes != "object" || components != undefined && typeof components != "object"){
             error("Values in router must be an object")
         }else{
-            for(let i=0; i<routes.length; i++){
-                let route = Object.keys(routes[i])[0]
+            for(let i=0; i<Object.keys(routes).length; i++){
+                let route = Object.keys(routes)[i]
     
                 if(route != "/"){
-                    route = `${Object.keys(routes[i])[0]}/`
+                    route = `${Object.keys(routes)[i]}/`
                 }
                 if(window.location.pathname == route){
                     let pages = []
+                    
+                    
                     eval(`
                         ${create}
                         ${elements()}
                         ${create_components(components)}
-                        ${routes[i][Object.keys(routes[i])[0]]}
+                        ${routes[Object.keys(routes)[i]]}
     
-                        const content = ${routes[i][Object.keys(routes[i])[0]].name}()
+                        const content = ${routes[Object.keys(routes)[i]].name}()
                         for(let i=0; i<content.length; i++){
                             pages.push(content[i])
                         }

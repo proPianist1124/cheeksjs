@@ -41,8 +41,8 @@ function index(){
                 span("Hydro", { style:"font-style:italic" }),
                 "JS Framework",
                 span("IN BETA", { style:"margin-left:10px; font-size:13px; text-decoration:underline; color:var(--text);" })
-            ], { style:"text-align:center" }),
-            p("A frontend framework where you can write every single page of your site in one file", { style:"text-align:center; color:var(--text-secondary);" }),
+            ], { style:"text-align:center; font-size:45px;" }),
+            p("The frontend framework where one can write every single page of your site inside a single shitty file", { style:"text-align:center; color:var(--text-secondary);" }),
             div([
                 a(
                     button(
@@ -54,7 +54,7 @@ function index(){
                         "Github Repo", { style:"margin-left:10px" }
                     ), { href:"https://github.com/propianist1124/hydrojs", target:"_blank"}
                 )
-            ], { style:"display:flex; align-items:center; justify-content:center;" }),
+            ], { style:"display:flex; align-items:center; justify-content:center;" })
         ], { class:"main" })
     ]
 }
@@ -120,7 +120,7 @@ function basics_docs(){
         title("Basics - HydroJS"),
         navbar(),
         div([
-            h3("The Basics"),
+            h1("The Basics"),
             p("Some basic syntax for components"),
             code(`p("some random text", { style:"color:red", class:"test_class", id:"test_id" })`, { class:"language-js" }),
             p("The code block above shows text with some in-text styling. You can also add other attributes, like 'class', 'id', 'href', etc."),
@@ -170,13 +170,13 @@ function test_page(){
 }
 
 router(
-    [
-        { "/":index },
-        { "/docs/getting-started":getting_started_docs },
-        { "/docs/routing":routing_docs },
-        { "/docs/basics":basics_docs },
-        { "/test_page":test_page }
-    ],
+    {
+        "/":index,
+        "/docs/getting-started":getting_started_docs,
+        "/docs/routing":routing_docs,
+        "/docs/basics":basics_docs,
+        "/test_page":test_page
+    },
     [
         meta,
         navbar
