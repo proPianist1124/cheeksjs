@@ -2,9 +2,10 @@
 https://prismjs.com/download.html#themes=prism-solarizedlight&languages=markup+clike+javascript */
 code[class*=language-],
 pre[class*=language-] {
-    color: #657b83;
-    text-align: left;
-    white-space: pre;
+    color: #D4D4D8;
+    text-align:left;
+    display:block;
+    white-space:pre-wrap;
     /*word-spacing: normal;
     word-break: normal;
     word-wrap: normal;*/
@@ -29,7 +30,7 @@ pre[class*=language-] {
 
 :not(pre)>code[class*=language-],
 pre[class*=language-] {
-    background-color: #fdf6e3
+    background-color: #3F3F46
 }
 
 
@@ -66,7 +67,7 @@ pre[class*=language-] {
 .token.selector,
 .token.string,
 .token.url {
-    color: #2aa198
+    color: #98fb98;
 }
 
 .token.entity {
@@ -77,12 +78,12 @@ pre[class*=language-] {
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-    color: #859900
+    color: #F5A524
 }
 
 .token.class-name,
 .token.function {
-    color: #b58900
+    color: #7EE7FC;
 }
 
 .token.important,
@@ -93,13 +94,13 @@ pre[class*=language-] {
 
 .token.bold,
 .token.important {
-    font-weight: 700
+    font-weight: 700;
 }
 
 .token.italic {
-    font-style: italic
+    font-style: italic;
 }
 
 .token.entity {
-    cursor: help
+    cursor: help;
 }

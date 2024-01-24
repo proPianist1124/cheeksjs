@@ -1,32 +1,43 @@
-import { create, error } from "./helpers.js"
-import { components } from "./components.js"
+import { create, error, create_components } from "./helpers.js"
+import { elements } from "./elements.js"
 
 // routing
-export function router(routes){
-    if(typeof routes != "object"){
-        error("Router must be an object")
-    }else{
-        for(let i=0; i<routes.length; i++){
-            if(window.location.pathname == `${routes[i].route}/`){
-                let pages = []
-                eval(`
-                    ${create.toString()}
-                    ${components()}
-                    ${routes[i].page}
-                    const content = ${routes[i].page.name}();
-                    for(let i=0; i<content.length; i++){
-                        pages.push(content[i])
-                    }
-                `)
-                document.body.outerHTML = pages.join("")
+export function router(routes, components){
+    try{
+        if(typeof routes != "object" || components != undefined && typeof components != "object"){
+            error("Values in router must be an object")
+        }else{
+            for(let i=0; i<routes.length; i++){
+                let route = Object.keys(routes[i])[0]
+    
+                if(route != "/"){
+                    route = `${Object.keys(routes[i])[0]}/`
+                }
+                if(window.location.pathname == route){
+                    let pages = []
+                    eval(`
+                        ${create}
+                        ${elements()}
+                        ${create_components(components)}
+                        ${routes[i][Object.keys(routes[i])[0]]}
+    
+                        const content = ${routes[i][Object.keys(routes[i])[0]].name}()
+                        for(let i=0; i<content.length; i++){
+                            pages.push(content[i])
+                        }
+                    `)
+                    pages = String(pages.join(""))
+                    document.body.outerHTML = pages.replace(",", "")
+                }
             }
         }
+    }catch(e){
+        error(e)
     }
 }
 
 
-// miscellaneous
-
+// other
 export function title(title){
     if(title == undefined){
         error("Title must have content inside")

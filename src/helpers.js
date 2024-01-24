@@ -39,6 +39,19 @@ export function create(type, tag, text, attr){
             }else{
                 return element.outerHTML
             }
+            return ""
+    }
+}
+
+export function create_components(components){
+    if(typeof components != "object"){
+        error(`Components must be of 'object' type`)
+    }else{
+        let component_list = []
+        for(let i=0; i<components.length; i++){
+            component_list.push(components[i])
+        }
+        return component_list.join("")
     }
 }
 

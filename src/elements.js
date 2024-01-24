@@ -1,7 +1,7 @@
-export function components(){
-    let component_list = []
+export function elements(){
+    let element_list = []
 
-    const elements = [
+    const tags = [
         { tag:"h1", type:"multi" },
         { tag:"h2", type:"multi" },
         { tag:"h3", type:"multi" },
@@ -25,18 +25,18 @@ export function components(){
         { tag:"tr", type:"multi" },
         { tag:"td", type:"multi" },
         { tag:"th", type:"multi" },
-        { tag:"hr", type:"multi" },
+        { tag:"hr", type:"single" },
         { tag:"meta", type:"single" },
         { tag:"link", type:"single" },
         { tag:"style", type:"multi"},
     ]
 
-    for(let i=0; i<elements.length; i++){
-        if(elements[i].type == "multi"){
-            component_list.push(`function ${elements[i].tag}(text, attr){return create("${elements[i].type}", "${elements[i].tag}", text, attr)}`)
-        }else if(elements[i].type == "single"){
-            component_list.push(`function ${elements[i].tag}(attr){return create("${elements[i].type}", "${elements[i].tag}", null, attr)}`)
+    for(let i=0; i<tags.length; i++){
+        if(tags[i].type == "multi"){
+            element_list.push(`function ${tags[i].tag}(text, attr){return create("${tags[i].type}", "${tags[i].tag}", text, attr)}`)
+        }else if(tags[i].type == "single"){
+            element_list.push(`function ${tags[i].tag}(attr){return create("${tags[i].type}", "${tags[i].tag}", null, attr)}`)
         }
     }
-    return component_list.join("")
+    return element_list.join("")
 }

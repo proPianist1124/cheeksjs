@@ -1,3 +1,3 @@
-# CheeksJS Framework
+# HydroJS Framework
 
-Kindly refer to [our official documentation](https://cheeksjs.pages.dev/) to learn about my cool framework
+Kindly refer to [our official documentation](https://hydrojs.pages.dev/) to learn more about HydroJS
