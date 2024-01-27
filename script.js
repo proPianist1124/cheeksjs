@@ -66,12 +66,21 @@ function getting_started_docs(){
         navbar(),
         div([
             h1("Getting Started"),
+            h3("Installation"),
+            p("To install HydroJS, for every page you plan on using HydroJS to write your pages, copy paste the below."),
+            code(`&lt;script src="/script.js"&gt;&lt;/script&gt;`, { class:"language-html" }),
+            p([
+                "For setting up custom pages and routes, refer to ",
+                a("Routing", { href:"/docs/routing" }),
+                " documentation"
+            ]),
+            h3("Templates"),
             p([
                 "Run this into your terminal to clone our ",
-                b("our documentation site "),
-                "as a template (an optional step)."
+                b("our documentation site"),
+                " if you're too lazy to set up a Hydrojs site yourself."
             ]),
-            code("git clone https://github.com/proPianist1124/hydrojs.git" , { class:"language-js" }),
+            code("git clone https://github.com/proPianist1124/hydrojs.git" , { class:"language-js" })
         ], { class:"main" }),
     ]
 }
@@ -83,6 +92,7 @@ function routing_docs(){
         navbar(),
         div([
             h1("Routing"),
+            h3("Setting up routes"),
             p("This is the most important part - importing the router in the file 'script.js'. Use the 'router' function and inside create an array of objects. Each object should have a 'route' and 'page' property."),
             code(`import { router } from "https://hydrojs.pages.dev/src/dom.js"
 
@@ -121,7 +131,7 @@ function basics_docs(){
         navbar(),
         div([
             h1("The Basics"),
-            p("Some basic syntax for components"),
+            h3("Syntax"),
             code(`p("some random text", { style:"color:red", class:"test_class", id:"test_id" })`, { class:"language-js" }),
             p("The code block above shows text with some in-text styling. You can also add other attributes, like 'class', 'id', 'href', etc."),
             code(`p([
@@ -130,7 +140,7 @@ function basics_docs(){
 ], { style:"color:red" }) // you can continue to add other attributes inside this component`, { class:"language-js" }),
             p("The code block above shows components nested inside components. The structure is an array of components."),
             br(),
-            h3("4. Functions"),
+            h3("Functions"),
             p("It's also possible for you to have functions inside components. Below is an example:"),
             code(`function index(){
     function click(){

@@ -36,12 +36,9 @@ export function create(type, tag, text, attr){
             }
             if(tag == "link"){
                 document.head.appendChild(element)
-
-                // some preloading stuff going on here in the future to make shit fastser
             }else{
                 return element.outerHTML
             }
-            return ""
     }
 }
 

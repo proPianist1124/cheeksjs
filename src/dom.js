@@ -20,16 +20,23 @@ export function router(routes, components){
                     eval(`
                         ${create}
                         ${elements()}
-                        ${create_components(components)}
+                        ${components ? create_components(components) : ""}
                         ${routes[Object.keys(routes)[i]]}
     
                         const content = ${routes[Object.keys(routes)[i]].name}()
                         for(let i=0; i<content.length; i++){
+                            if(typeof content[i] == "object"){
+                                for(let f=0; f<content[i].length; f++){
+                                    if(content[i][f] == null || content[i][f] == undefined){
+                                        content[i].splice(f, 1)
+                                    }
+                                }
+                            }
                             pages.push(content[i])
                         }
                     `)
                     pages = String(pages.join(""))
-                    document.body.outerHTML = pages.replace(",", "")
+                    document.body.outerHTML = pages
                 }
             }
         }
@@ -66,4 +73,5 @@ export function script(text){
     }
 
     document.body.appendChild(script_element)
+    return null
 }
